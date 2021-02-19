@@ -59,13 +59,13 @@ let handler  = async (m, { conn, usedPrefix: _p }) => {
 │↱ ⌬ ꃅꍏꀤꀤ, %name  ᥬ😳᭄
 │↾    
 │↱ ⌬ 𝕩𝕡 : *%exp XP*
-│↳ ⌬ 𝔩L𝔦𝔪𝔦𝔱 : *%limit*
+│↳ ⌬ L𝔦𝔪𝔦𝔱 : *%limit*
 │↾
 │↱ ⌬ ꓄ꋬꋊꍌꍌꋬ꒒ : *%week , %date*
 │↳ ⌬ ᒍᗩᗰ : *%time*
 │⇂
-│↱ ⌬ ฿Ø₮ ₳₵₮łVɆ : *%uptime* (*%muptime*)
-│↳ ⌬ D͛a͛t͛a͛b͛a͛s͛e͛ U͛s͛e͛r͛s͛ : %rtotalreg of %totalreg users
+│↱ ⌬ Bot Active : *%uptime* (*%muptime*)
+│↳ ⌬ Database User : %rtotalreg of %totalreg users
 │⇂
 │↳
 ╰──────────────∗
@@ -74,7 +74,7 @@ let handler  = async (m, { conn, usedPrefix: _p }) => {
 │↳ instagram.com/stardustlrlr
 ╰──────────────∗
 %readmore`
-    let header = conn.menu.header || '╭────ᱬ` %category' ᱦ
+    let header = conn.menu.header || '╭────ᱬ ` %category'
     let body   = conn.menu.body   || '│ ⌬⇢ %cmd%islimit'
     let footer = conn.menu.footer || '╰─────────────ᜰ\n'
     let after  = conn.menu.after  || (conn.user.jid == global.conn.user.jid ? '' : `Powered by https://wa.me/${global.conn.user.jid.split`@`[0]}`) + `\n*%npmname@^%version*\n\`\`\`\%npmdesc\`\`\``
