@@ -1,7 +1,5 @@
-## Mlspacetoon Bot
+## Mlspacetoon Bot ![](https://visitor-badge.glitch.me/badge?page_id=mlspacetoon)
 ---
-![](https://visitor-badge.glitch.me/badge?page_id=mlspacetoon)
-
 <p align="center">
 <a href="#"><img title="stardustlrlr" src="https://img.shields.io/badge/Bot WhatsApp-green?colorA=%23ff0000&colorB=%23017e40&style=for-the-badge"></a>
 </p>
