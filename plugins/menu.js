@@ -53,6 +53,25 @@ let handler  = async (m, { conn, usedPrefix: _p }) => {
       'advanced': '𝐀𝐝𝐯𝐚𝐧𝐜𝐞𝐝',
       '': 'Next Update ComingSoon..',
     }
+    for (let plugin of Object.values(global.plugins))
+      if (plugin && 'tags' in plugin)
+        for (let tag of plugin.tags)
+          if (!tag in  tags) tags[tag] = tag
+    let help = Object.values(global.plugins).map(plugin => {
+      return {
+        help: plugin.help,
+        tags: plugin.tags,
+        prefix: 'customPrefix' in plugin,
+        limit: plugin.limit
+      }
+    })
+    let groups = {}
+    for (let tag in tags) {
+      groups[tag] = []
+      for (let menu of help)
+        if (menu.tags && menu.tags.includes(tag))
+          if (menu.help) groups[tag].push(menu)
+    }
     conn.menu = conn.menu ? conn.menu : {}
     let before = conn.menu.before || `
 ╭────᯽ ${conn.getName(conn.user.jid)} ᯽
@@ -67,14 +86,14 @@ let handler  = async (m, { conn, usedPrefix: _p }) => {
 │↱ ⌬ Bot Active : *%uptime* (*%muptime*)
 │↳ ⌬ Database User : %rtotalreg of %totalreg users
 │⇂
-│↳
+│↳ Nothing.
 ╰──────────────∗
 ╭────᯽ sosmed 
-│↱ https://youtu.be/n5aC8BzUlLU
-│↳ instagram.com/stardustlrlr
+│↱ ⌬ https://youtu.be/n5aC8BzUlLU
+│↳ ⌬ instagram.com/stardustlrlr
 ╰──────────────∗
 %readmore`
-    let header = conn.menu.header || '╭────ᱬ ` %category'
+    let header = conn.menu.header || '╭────「 %category 」'
     let body   = conn.menu.body   || '│ ⌬⇢ %cmd%islimit'
     let footer = conn.menu.footer || '╰─────────────ᜰ\n'
     let after  = conn.menu.after  || (conn.user.jid == global.conn.user.jid ? '' : `Powered by https://wa.me/${global.conn.user.jid.split`@`[0]}`) + `\n*%npmname@^%version*\n\`\`\`\%npmdesc\`\`\``
