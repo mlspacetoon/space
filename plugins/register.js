@@ -13,13 +13,14 @@ let handler = async function (m, { text, usedPrefix }) {
   user.registered = true
   let sn = createHash('md5').update(m.sender).digest('hex')
   m.reply(`
-Pendaftaran Berhasil!
+「 PENDAFTARAN BERHASIL 」
 
-╭─「 Info 」
-│ *Nama:* ${name}
-│ *Umur:* ${age}thn
-│ *SN:* ${sn}
-╰────
+╭◪ INFO
+╰───────────────────
+├❖ *Nama:* ${name}
+├❖ *Umur:* ${age}tahun
+├❖ *SN:* ${sn}
+╰───────────────────
 `.trim())
 }
 handler.help = ['daftar', 'reg', 'register'].map(v => v + ' <nama>.<umur>')
