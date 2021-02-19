@@ -60,8 +60,11 @@
 > node index.js
 ```
 --------------
+|Mlspacetoon | Bot |
+| :-: | :-: |
+---
 
-| Mlspacetoon | Bot |
+| Features | Menu |
 | :-: | :-: |
 | 𝐌𝐚𝐢𝐧 | ✔ |
 | 𝐈𝐧𝐟𝐨  | ✔ |
