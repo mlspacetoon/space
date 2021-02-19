@@ -13,7 +13,7 @@ let handler = async function (m, { text, usedPrefix }) {
   user.registered = true
   let sn = createHash('md5').update(m.sender).digest('hex')
   m.reply(`
-Daftar berhasil!
+Pendaftaran Berhasil!
 
 ╭─「 Info 」
 │ *Nama:* ${name}
