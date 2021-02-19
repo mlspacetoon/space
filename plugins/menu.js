@@ -125,9 +125,9 @@ let handler  = async (m, { conn, usedPrefix: _p }) => {
     throw e
   }
 }
-handler.help = ['on','start','?']
+handler.help = ['menu,'start','?']
 handler.tags = ['main']
-handler.command = /^(on|start|\?)$/i
+handler.command = /^(menu|start|\?)$/i
 handler.owner = false
 handler.mods = false
 handler.premium = false
