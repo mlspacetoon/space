@@ -35,63 +35,48 @@ let handler  = async (m, { conn, usedPrefix: _p }) => {
     let totalreg = Object.keys(global.DATABASE._data.users).length
     let rtotalreg = Object.values(global.DATABASE._data.users).filter(user => user.registered == true).length
     let tags = {
-      'main': 'Main',
-      'xp': 'Exp & Limit',
-      'sticker': 'Sticker',
-      'kerang': 'Kerang Ajaib',
-      'quotes': 'Quotes',
-      'admin': 'Admin',
-      'group': 'Group',
-      'internet': 'Internet',
-      'downloader': 'Downloader',
-      'tools': 'Tools',
-      'fun': 'Fun',
-      'jadibot': 'Jadi Bot',
-      'owner': 'Owner',
-      'host': 'Host',
-      'advanced': 'Advanced',
-      'info': 'Info',
-      '': 'No Category',
-    }
-    for (let plugin of Object.values(global.plugins))
-      if (plugin && 'tags' in plugin)
-        for (let tag of plugin.tags)
-          if (!tag in  tags) tags[tag] = tag
-    let help = Object.values(global.plugins).map(plugin => {
-      return {
-        help: plugin.help,
-        tags: plugin.tags,
-        prefix: 'customPrefix' in plugin,
-        limit: plugin.limit
-      }
-    })
-    let groups = {}
-    for (let tag in tags) {
-      groups[tag] = []
-      for (let menu of help)
-        if (menu.tags && menu.tags.includes(tag))
-          if (menu.help) groups[tag].push(menu)
+      'main': '𝐌𝐚𝐢𝐧',
+      'info': '𝐈𝐧𝐟𝐨',
+      'xp': '𝐄𝐱𝐩 & 𝐋𝐢𝐦𝐢𝐭',
+      'sticker': '𝐌𝐚𝐤𝐞𝐫',
+      'kerang': '𝐊𝐞𝐫𝐚𝐧𝐠',
+      'fun': '𝐅𝐮𝐧',
+      'quotes': '𝐐𝐮𝐨𝐭𝐞𝐬',
+      'admin': '𝐀𝐝𝐦𝐢𝐧',
+      'group': '𝐆𝐫𝐨𝐮𝐩',
+      'internet': '𝐒𝐞𝐚𝐫𝐜𝐡𝐢𝐧𝐠',
+      'downloader': '𝐃𝐨𝐰𝐧𝐥𝐨𝐚𝐝𝐞𝐫',
+      'tools': '𝐓𝐨𝐨𝐥𝐬',
+      'jadibot': '𝐔𝐬𝐞 𝐁𝐨𝐭',
+      'owner': '𝐎𝐰𝐧𝐞𝐫',
+      'host': '𝐇𝐨𝐬𝐭',
+      'advanced': '𝐀𝐝𝐯𝐚𝐧𝐜𝐞𝐝',
+      '': 'Next Update ComingSoon..',
     }
     conn.menu = conn.menu ? conn.menu : {}
     let before = conn.menu.before || `
-╭─「 ${conn.user.name} 」
-│ Hai, %name!
-│
-│ *%exp XP*
-│ Tersisa *%limit Limit*
-│
-│ Tanggal: *%week %weton, %date*
-│ Waktu: *%time*
-│
-│ Uptime: *%uptime* (*%muptime*)
-│ Database: %rtotalreg of %totalreg
-│ Github:
-│ %github
-╰────
+╭────᯽ ${conn.getName(conn.user.jid)} ᯽
+│↱ ⌬ ꃅꍏꀤꀤ, %name  ᥬ😳᭄
+│↾    
+│↱ ⌬ 𝕩𝕡 : *%exp XP*
+│↳ ⌬ 𝔩L𝔦𝔪𝔦𝔱 : *%limit*
+│↾
+│↱ ⌬ ꓄ꋬꋊꍌꍌꋬ꒒ : *%week , %date*
+│↳ ⌬ ᒍᗩᗰ : *%time*
+│⇂
+│↱ ⌬ ฿Ø₮ ₳₵₮łVɆ : *%uptime* (*%muptime*)
+│↳ ⌬ D͛a͛t͛a͛b͛a͛s͛e͛ U͛s͛e͛r͛s͛ : %rtotalreg of %totalreg users
+│⇂
+│↳
+╰──────────────∗
+╭────᯽ sosmed 
+│↱ https://youtu.be/n5aC8BzUlLU
+│↳ instagram.com/stardustlrlr
+╰──────────────∗
 %readmore`
-    let header = conn.menu.header || '╭─「 %category 」'
-    let body   = conn.menu.body   || '│ • %cmd%islimit'
-    let footer = conn.menu.footer || '╰────\n'
+    let header = conn.menu.header || '╭────ᱬ` %category' ᱦ
+    let body   = conn.menu.body   || '│ ⌬⇢ %cmd%islimit'
+    let footer = conn.menu.footer || '╰─────────────ᜰ\n'
     let after  = conn.menu.after  || (conn.user.jid == global.conn.user.jid ? '' : `Powered by https://wa.me/${global.conn.user.jid.split`@`[0]}`) + `\n*%npmname@^%version*\n\`\`\`\%npmdesc\`\`\``
     let _text  = before + '\n'
     for (let tag in groups) {
@@ -121,9 +106,9 @@ let handler  = async (m, { conn, usedPrefix: _p }) => {
     throw e
   }
 }
-handler.help = ['menu','help','?']
+handler.help = ['on','start','?']
 handler.tags = ['main']
-handler.command = /^(menu|help|\?)$/i
+handler.command = /^(on|start|\?)$/i
 handler.owner = false
 handler.mods = false
 handler.premium = false
