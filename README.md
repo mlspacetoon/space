@@ -64,7 +64,7 @@
 | :-: | :-: |
 ---
 
-| Features | Menu |
+| Features Menu | Informations |
 | :-: | :-: |
 | 𝐌𝐚𝐢𝐧 | ✔ |
 | 𝐈𝐧𝐟𝐨  | ✔ |
