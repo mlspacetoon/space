@@ -36,22 +36,22 @@ let handler  = async (m, { conn, usedPrefix: _p }) => {
     let rtotalreg = Object.values(global.DATABASE._data.users).filter(user => user.registered == true).length
     let tags = {
       'main': '𝐌𝐚𝐢𝐧',
-      'info': '𝐈𝐧𝐟𝐨',
       'xp': '𝐄𝐱𝐩 & 𝐋𝐢𝐦𝐢𝐭',
       'sticker': '𝐌𝐚𝐤𝐞𝐫',
       'kerang': '𝐊𝐞𝐫𝐚𝐧𝐠',
-      'fun': '𝐅𝐮𝐧',
       'quotes': '𝐐𝐮𝐨𝐭𝐞𝐬',
       'admin': '𝐀𝐝𝐦𝐢𝐧',
       'group': '𝐆𝐫𝐨𝐮𝐩',
       'internet': '𝐒𝐞𝐚𝐫𝐜𝐡𝐢𝐧𝐠',
       'downloader': '𝐃𝐨𝐰𝐧𝐥𝐨𝐚𝐝𝐞𝐫',
       'tools': '𝐓𝐨𝐨𝐥𝐬',
+      'fun': '𝐅𝐮𝐧',
       'jadibot': '𝐔𝐬𝐞 𝐁𝐨𝐭',
       'owner': '𝐎𝐰𝐧𝐞𝐫',
       'host': '𝐇𝐨𝐬𝐭',
       'advanced': '𝐀𝐝𝐯𝐚𝐧𝐜𝐞𝐝',
-      '': 'Next Update ComingSoon..',
+      'info': '𝐈𝐧𝐟𝐨',
+      '': 'Coming Soon',
     }
     for (let plugin of Object.values(global.plugins))
       if (plugin && 'tags' in plugin)
@@ -74,14 +74,14 @@ let handler  = async (m, { conn, usedPrefix: _p }) => {
     }
     conn.menu = conn.menu ? conn.menu : {}
     let before = conn.menu.before || `
-╭────᯽ ${conn.getName(conn.user.jid)} ᯽
-│↱ ⌬ ꃅꍏꀤꀤ, %name  ᥬ😳᭄
+╭────᯽ ${conn.user.name} ᯽
+│↱ ⌬ ꃅꍏi, %name  ᥬ😳᭄
 │↾    
-│↱ ⌬ 𝕩𝕡 : *%exp XP*
-│↳ ⌬ L𝔦𝔪𝔦𝔱 : *%limit*
+│↱ ⌬ xp : *%exp XP*
+│↳ ⌬ Limit : *%limit*
 │↾
-│↱ ⌬ ꓄ꋬꋊꍌꍌꋬ꒒ : *%week , %date*
-│↳ ⌬ ᒍᗩᗰ : *%time*
+│↱ ⌬ ꓄anggal : *%week %weton, %date*
+│↳ ⌬ ᒍam : *%time*
 │⇂
 │↱ ⌬ Bot Active : *%uptime* (*%muptime*)
 │↳ ⌬ Database User : %rtotalreg of %totalreg users
@@ -125,7 +125,7 @@ let handler  = async (m, { conn, usedPrefix: _p }) => {
     throw e
   }
 }
-handler.help = ['menu,'help','?']
+handler.help = ['menu','help','?']
 handler.tags = ['main']
 handler.command = /^(menu|help|\?)$/i
 handler.owner = false
