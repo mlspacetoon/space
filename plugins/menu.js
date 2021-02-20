@@ -90,8 +90,8 @@ let handler  = async (m, { conn, usedPrefix: _p }) => {
 ╰──────────────∗
 %readmore
 ╭────᯽ *Sosmed*
-│↱ ⌬ instagram.com/itspapoy
-│↳ ⌬ instagram.com/stardustlrlr
+│↱ ⌬ https://instagram.com/itspapoy
+│↳ ⌬ https://instagram.com/stardustlrlr
 ╰──────────────∗
 %readmore`
     let header = conn.menu.header || '╭────「 %category 」'
