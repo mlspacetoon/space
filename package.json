@@ -1,7 +1,7 @@
 {
-  "name": "space",
+  "name": "mlspacetoon",
   "version": "1.3.0",
-  "description": "Termux WhatsApp Bot",
+  "description": "by stardustlrlr",
   "depecrated": false,
   "main": "index.js",
   "directories": {
