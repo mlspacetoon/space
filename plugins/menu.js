@@ -99,7 +99,7 @@ let handler  = async (m, { conn, usedPrefix: _p }) => {
 ──────────────
 %readmore
 tydak menerima donasi/donate buat klen aja ditabung maaci:>
-readmore
+%readmore
 Btw have a nice day:>
 %readmore`
     let header = conn.menu.header || '╭───ᴥᵜᴥ %category ᴥᵜᴥ '
