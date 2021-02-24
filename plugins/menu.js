@@ -85,7 +85,7 @@ let handler  = async (m, { conn, usedPrefix: _p }) => {
 ↳ ⌬ ᒍam : *%time*
 ᳱ
 ↱ ⌬ Bot Active : *%uptime*
-↳ ⌬ Database User : %rtotalreg of %totalreg users
+↳ ⌬ Database User : %totalreg users
 ᳱ
 ↳ ⌬ NamaBot: ${conn.user.name} Bot
 ──────────────
