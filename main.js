@@ -86,7 +86,7 @@ conn.handler = async function (m) {
       let user
       if (user = global.DATABASE._data.users[m.sender]) {
         if (!isNumber(user.exp)) user.exp = 0
-        if (!isNumber(user.limit)) user.limit = 20
+        if (!isNumber(user.limit)) user.limit = 30
         if (!isNumber(user.lastclaim)) user.lastclaim = 0
         if (!'registered' in user) user.registered = false
         if (!user.registered) {
@@ -96,7 +96,7 @@ conn.handler = async function (m) {
         }
       } else global.DATABASE._data.users[m.sender] = {
         exp: 0,
-        limit: 20,
+        limit: 30,
         lastclaim: 0,
         registered: false,
         name: conn.getName(m.sender),
@@ -284,8 +284,8 @@ conn.handler = async function (m) {
     }
   }
 }
-conn.welcome = 'Selamat Datang @user *Di Group yang Penuh Drama* @subject\nNama:\nUmur:\nAskot:\nDoi?\nMoga betah di Group!'
-conn.bye = 'Sayonaraaa👋🏻 @user yang keluar nitip seblaq xixi'
+conn.welcome = 'Selamat Datang @user *Di Group yang Penuh Drama* @subject\n================\nNama:\nUmur:\nAskot:\nDoi?\nMoga betah di Group!'
+conn.bye = 'Sayonaraaa👋🏻 @user\nyang keluar nitip seblaq xixixi'
 conn.onAdd = async function ({ m, participants }) {
   let chat = global.DATABASE._data.chats[m.key.remoteJid]
   if (!chat.welcome) return
