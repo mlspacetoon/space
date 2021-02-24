@@ -76,7 +76,7 @@ let handler  = async (m, { conn, usedPrefix: _p }) => {
     let before = conn.menu.before || `
 ⌲ *ꃅolla* %name ᥬ😳᭄ 
 --------------------
-↱ ⌬   *INFO*
+↱ ⌬        *INFO*
 ᳱ
 ↱ ⌬ XP : *%exp XP*
 ↳ ⌬ Limit : *%limit*
@@ -89,21 +89,17 @@ let handler  = async (m, { conn, usedPrefix: _p }) => {
 ᳱ
 ↳ ⌬ NamaBot: ${conn.user.name} Bot
 ──────────────
+
 ⌲ *Sosmed*
 --------------------
-↱ ⌬ telejram: t.me/padlikodil
-↳ ⌬ instajram: instagram.com/stardustlrlr
-ᳱ
-↱ ⌬ yutup: stardustlrlr
-↳ ⌬ github: github.com/mlspacetoon
+↱ ⌬ yt: stardustlrlr
+↳ ⌬ ig: stardustlrlr
 ──────────────
-%readmore
-tydak menerima donasi/donate buat klen aja ditabung maaci:>
 %readmore
 Btw have a nice day:>
 %readmore`
-    let header = conn.menu.header || '╭───ᴥᵜᴥ %category ᴥᵜᴥ '
-    let body   = conn.menu.body   || '│ ⌬ %cmd%islimit'
+    let header = conn.menu.header || '┌────── %category ──────•°҈ۣٜٜٜٜٜٜٜٜٜٜٜٜٜٜٜٜٜٜٜٜٜٜٜٜٜٜٜٜٜٜٜٜٜٜٜٜٜٜٜٜٜٜٜٜٜٜٜٜٜۜ͜͡⸙ '
+    let body   = conn.menu.body   || '│ ˚• ͟͟͞͞➳ ⌬ %cmd%islimit'
     let footer = conn.menu.footer || '╰─────────────ᜰ\n'
     let after  = conn.menu.after  || (conn.user.jid == global.conn.user.jid ? '' : `Powered by https://wa.me/${global.conn.user.jid.split`@`[0]}`) + `\n*%npmname@^%version*\n\`\`\`\%npmdesc\`\`\``
     let _text  = before + '\n'
@@ -147,7 +143,7 @@ handler.admin = false
 handler.botAdmin = false
 
 handler.fail = null
-handler.exp = 3
+handler.exp = 5
 
 module.exports = handler
 
