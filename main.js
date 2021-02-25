@@ -16,7 +16,7 @@ let rl = Readline.createInterface(process.stdin, process.stdout)
 let WAConnection = simple.WAConnection(_WAConnection)
 
 
-global.owner = ['6281515860089'] // Put your number here
+global.owner = ['6287714745440'] // Put your number here
 global.mods = [] // Want some help?
 global.prems = [] // Premium user has unlimited limit
 global.APIs = { // API Prefix
@@ -38,7 +38,7 @@ global.timestamp = {
 const PORT = process.env.PORT || 3000
 let opts = yargs(process.argv.slice(2)).exitProcess(false).parse()
 global.opts = Object.freeze({...opts})
-global.prefix = new RegExp('^[' + (opts['prefix'] || '‎xzXZ\\/i!#$%\\-+£¢€¥^°=¶∆×÷π√✓©®:;?&.') + ']')
+global.prefix = new RegExp('^[' + (opts['prefix'] || '!#-zZ/%$.') + ']')
 
 global.DATABASE = new (require('./lib/database'))(`${opts._[0] ? opts._[0] + '_' : ''}database.json`, null, 2)
 if (!global.DATABASE.data.users) global.DATABASE.data = {
@@ -86,7 +86,7 @@ conn.handler = async function (m) {
       let user
       if (user = global.DATABASE._data.users[m.sender]) {
         if (!isNumber(user.exp)) user.exp = 0
-        if (!isNumber(user.limit)) user.limit = 10
+        if (!isNumber(user.limit)) user.limit = 30
         if (!isNumber(user.lastclaim)) user.lastclaim = 0
         if (!'registered' in user) user.registered = false
         if (!user.registered) {
@@ -96,7 +96,7 @@ conn.handler = async function (m) {
         }
       } else global.DATABASE._data.users[m.sender] = {
         exp: 0,
-        limit: 10,
+        limit: 30,
         lastclaim: 0,
         registered: false,
         name: conn.getName(m.sender),
