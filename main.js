@@ -16,7 +16,7 @@ let rl = Readline.createInterface(process.stdin, process.stdout)
 let WAConnection = simple.WAConnection(_WAConnection)
 
 
-global.owner = ['6287714745440'] // Put your number here
+global.owner = ['6281515860089'] // Put your number here
 global.mods = [] // Want some help?
 global.prems = [] // Premium user has unlimited limit
 global.APIs = { // API Prefix
@@ -86,7 +86,7 @@ conn.handler = async function (m) {
       let user
       if (user = global.DATABASE._data.users[m.sender]) {
         if (!isNumber(user.exp)) user.exp = 0
-        if (!isNumber(user.limit)) user.limit = 30
+        if (!isNumber(user.limit)) user.limit = 10
         if (!isNumber(user.lastclaim)) user.lastclaim = 0
         if (!'registered' in user) user.registered = false
         if (!user.registered) {
@@ -96,7 +96,7 @@ conn.handler = async function (m) {
         }
       } else global.DATABASE._data.users[m.sender] = {
         exp: 0,
-        limit: 30,
+        limit: 10,
         lastclaim: 0,
         registered: false,
         name: conn.getName(m.sender),
@@ -127,7 +127,7 @@ conn.handler = async function (m) {
     m.exp += 1
     
   	let usedPrefix
-    let user = global.DATABASE._data.users[m.sender]
+    let _user = global.DATABASE._data.users[m.sender]
   	for (let name in global.plugins) {
   	  let plugin = global.plugins[name]
       if (!plugin) continue
@@ -202,7 +202,7 @@ conn.handler = async function (m) {
           fail('private', m, this)
           continue
         }
-        if (plugin.register && user.registered == false) { // Butuh daftar?
+        if (plugin.register && _user.registered == false) { // Butuh daftar?
           fail('unreg', m, this)
           continue
         }
@@ -239,6 +239,7 @@ conn.handler = async function (m) {
           console.log(e)
           if (e) m.reply(util.format(e))
         } finally {
+          // m.reply(util.format(_user)) 
           if (m.limit) m.reply(+ m.limit + ' Limit terpakai')
         }
   			break
@@ -285,7 +286,7 @@ conn.handler = async function (m) {
   }
 }
 conn.welcome = 'Selamat Datang @user *Di Group yang Penuh Drama* @subject\n================\nNama:\nUmur:\nAskot:\nDoi?\nMoga betah di Group!'
-conn.bye = 'Sayonaraaa👋🏻 @user\nyang keluar nitip seblaq xixixi'
+conn.bye = 'Sayonaraaa👋🏻 @user\nyang keluar nitip seblaq yaa xixixi'
 conn.onAdd = async function ({ m, participants }) {
   let chat = global.DATABASE._data.chats[m.key.remoteJid]
   if (!chat.welcome) return
@@ -472,4 +473,3 @@ Object.freeze(global.support)
 if (!global.support.ffmpeg) conn.logger.warn('Please install ffmpeg for sending videos (pkg install ffmpeg)')
 if (!global.support.ffmpegWebp) conn.logger.warn('Stickers may not animated without libwebp on ffmpeg (--emable-ibwebp while compiling ffmpeg)')
 if (!global.support.convert) conn.logger.warn('Stickers may not work without imagemagick if libwebp on ffmpeg doesnt isntalled (pkg install imagemagick)')
-
