@@ -13,14 +13,24 @@ let handler = async function (m, { text, usedPrefix }) {
   user.registered = true
   let sn = createHash('md5').update(m.sender).digest('hex')
   m.reply(`
-    「 PENDAFTARAN BERHASIL 」
-╭───────────────────
-├◪ INFO
-├───────────────────
-├❖ *Nama:* ${name}
-├❖ *Umur:* ${age}tahun
-├❖ *SN:* ${sn}
-╰───────────────────
+「 PENDAFTARAN BERHASIL 」
+⏥⏥⏥⏥⏥⏥⏥⏥⏥⏥
+⏜⏜⏜⏜⏜⏜⏜⏜
+⌲    *Informations* 
+◪ Tanggal: %week, %date
+⏝⏝⏝⏝⏝⏝⏝⏝
+⏥⏥⏥⏥⏥⏥⏥⏥⏥⏥
+------------------------------
+⌬ \`\`\`Nama: ${name}\`\`\`
+⌬ \`\`\`Umur: ${age} tahun\`\`\`
+⌬ \`\`\`SN: ${sn}\`\`\`
+------------------------------
+⏥⏥⏥⏥⏥⏥⏥⏥⏥⏥
+⏜⏜⏜⏜⏜⏜⏜⏜
+⍚        *NOTE*
+Diharapkan SN ini jangan hilang karena ini sangat penting:v
+⏝⏝⏝⏝⏝⏝⏝⏝
+⏥⏥⏥⏥⏥⏥⏥⏥⏥⏥
 `.trim())
 }
 handler.help = ['daftar', 'reg', 'register'].map(v => v + ' <nama>.<umur>')
