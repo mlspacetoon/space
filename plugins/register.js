@@ -17,7 +17,6 @@ let handler = async function (m, { text, usedPrefix }) {
 ⏥⏥⏥⏥⏥⏥⏥⏥⏥⏥
 ⏜⏜⏜⏜⏜⏜⏜⏜
 ⌲    *Informations* 
-◪ Tanggal: %week, %date
 ⏝⏝⏝⏝⏝⏝⏝⏝
 ⏥⏥⏥⏥⏥⏥⏥⏥⏥⏥
 ------------------------------
@@ -27,8 +26,8 @@ let handler = async function (m, { text, usedPrefix }) {
 ------------------------------
 ⏥⏥⏥⏥⏥⏥⏥⏥⏥⏥
 ⏜⏜⏜⏜⏜⏜⏜⏜
-⍚        *NOTE*
-Diharapkan SN ini jangan hilang karena ini sangat penting:v
+⍚ *NOTE*
+Diharapkan SN ini jangan hilang,\nKarena ini sangat penting:v
 ⏝⏝⏝⏝⏝⏝⏝⏝
 ⏥⏥⏥⏥⏥⏥⏥⏥⏥⏥
 `.trim())
