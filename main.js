@@ -86,7 +86,7 @@ conn.handler = async function (m) {
       let user
       if (user = global.DATABASE._data.users[m.sender]) {
         if (!isNumber(user.exp)) user.exp = 0
-        if (!isNumber(user.limit)) user.limit = 30
+        if (!isNumber(user.limit)) user.limit = 35
         if (!isNumber(user.lastclaim)) user.lastclaim = 0
         if (!'registered' in user) user.registered = false
         if (!user.registered) {
@@ -96,7 +96,7 @@ conn.handler = async function (m) {
         }
       } else global.DATABASE._data.users[m.sender] = {
         exp: 0,
-        limit: 30,
+        limit: 35,
         lastclaim: 0,
         registered: false,
         name: conn.getName(m.sender),
@@ -124,7 +124,7 @@ conn.handler = async function (m) {
     if (!m.fromMe && opts['self']) return
     if (!m.text) return
     if (m.isBaileys) return
-    m.exp += 1
+    m.exp += 5
     
   	let usedPrefix
     let _user = global.DATABASE._data.users[m.sender]
@@ -240,7 +240,7 @@ conn.handler = async function (m) {
           if (e) m.reply(util.format(e))
         } finally {
           // m.reply(util.format(_user)) 
-          if (m.limit) m.reply(+ m.limit + ' Limit terpakai')
+          if (m.limit) m.reply(+ m.limit + ' limit berkurang')
         }
   			break
   		}
@@ -285,8 +285,8 @@ conn.handler = async function (m) {
     }
   }
 }
-conn.welcome = 'Selamat Datang @user *Di Group yang Penuh Drama* @subject\n================\nNama:\nUmur:\nAskot:\nDoi?\nMoga betah di Group!'
-conn.bye = 'Sayonaraaa👋🏻 @user\nyang keluar nitip seblaq yaa xixixi'
+conn.welcome = 'Selamat Datang @user\n*Di GROUP* @subject\n===============================\nጸ Nama:\n⌬ Umur:\n⌬ Askot:\n⌬ Doi?\nSemoga betah ngogheyy.'
+conn.bye = '*Sayonaraaa👋🏻* @user\nKenapa *keluar* sihh ah *malesin* yawdah awas aja *balik* lagi'
 conn.onAdd = async function ({ m, participants }) {
   let chat = global.DATABASE._data.chats[m.key.remoteJid]
   if (!chat.welcome) return
