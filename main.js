@@ -36,9 +36,9 @@ global.timestamp = {
 }
 // global.LOGGER = logs()
 const PORT = process.env.PORT || 3000
-let opts = yargs(process.argv.slice(2)).exitProcess(false).parse()
-global.opts = Object.freeze({...opts})
-global.prefix = new RegExp('^[' + (opts['prefix'] || '!#-zZ/%$.') + ']')
+global.opts = new Object(yargs(process.argv.slice(2)).exitProcess(false).parse())
+
+global.prefix = new RegExp('^[' + (opts['prefix'] || '‎xzXZ\\/i!#$%\\-+£¢€¥^°=¶∆×÷π√✓©®:;?&.') + ']')
 
 global.DATABASE = new (require('./lib/database'))(`${opts._[0] ? opts._[0] + '_' : ''}database.json`, null, 2)
 if (!global.DATABASE.data.users) global.DATABASE.data = {
@@ -86,7 +86,7 @@ conn.handler = async function (m) {
       let user
       if (user = global.DATABASE._data.users[m.sender]) {
         if (!isNumber(user.exp)) user.exp = 0
-        if (!isNumber(user.limit)) user.limit = 35
+        if (!isNumber(user.limit)) user.limit = 30
         if (!isNumber(user.lastclaim)) user.lastclaim = 0
         if (!'registered' in user) user.registered = false
         if (!user.registered) {
@@ -94,14 +94,18 @@ conn.handler = async function (m) {
           if (!isNumber(user.age)) user.age = -1
           if (!isNumber(user.regTime)) user.regTime = -1
         }
+        if (!isNumber(user.afk)) user.afk = -1
+        if (!'afkReason' in user) user.afkReason = ''
       } else global.DATABASE._data.users[m.sender] = {
         exp: 0,
-        limit: 35,
+        limit: 30,
         lastclaim: 0,
         registered: false,
         name: conn.getName(m.sender),
         age: -1,
         regTime: -1,
+        afk: -1,
+        afkReason: ''
       }
       
       let chat
@@ -124,15 +128,29 @@ conn.handler = async function (m) {
     if (!m.fromMe && opts['self']) return
     if (!m.text) return
     if (m.isBaileys) return
-    m.exp += 5
+    m.exp += 1
     
   	let usedPrefix
     let _user = global.DATABASE._data.users[m.sender]
+
+    let isROwner = [global.conn.user.jid, ...global.owner].map(v => v.replace(/[^0-9]/g, '') + '@s.whatsapp.net').includes(m.sender)
+    let isOwner = isROwner || m.fromMe
+    let isMods = isOwner || global.mods.map(v => v.replace(/[^0-9]/g, '') + '@s.whatsapp.net').includes(m.sender)
+    let isPrems = isROwner || global.prems.map(v => v.replace(/[^0-9]/g, '') + '@s.whatsapp.net').includes(m.sender)
+    let groupMetadata = m.isGroup ? await this.groupMetadata(m.chat) : {}
+    let participants = m.isGroup ? groupMetadata.participants : []
+    let user = m.isGroup ? participants.find(u => u.jid == m.sender) : {} // User Data
+    let bot = m.isGroup ? participants.find(u => u.jid == this.user.jid) : {} // Your Data
+    let isAdmin = user.isAdmin || user.isSuperAdmin || false // Is User Admin?
+    let isBotAdmin = bot.isAdmin || bot.isSuperAdmin || false // Are you Admin?
   	for (let name in global.plugins) {
   	  let plugin = global.plugins[name]
       if (!plugin) continue
       if (!opts['restrict']) if (plugin.tags && plugin.tags.includes('admin')) continue
       let _prefix = plugin.customPrefix ? plugin.customPrefix : conn.prefix ? conn.prefix : global.prefix
+      if (typeof plugin.before == 'function') if (await plugin.before.call(this, m, {
+        usedPrefix, _user
+      })) continue
   	  if ((usedPrefix = (_prefix.exec(m.text) || '')[0])) {
         let noPrefix = m.text.replace(usedPrefix, '')
   		  let [command, ...args] = noPrefix.trim().split` `.filter(v=>v)
@@ -140,9 +158,7 @@ conn.handler = async function (m) {
         let _args = noPrefix.trim().split` `.slice(1)
         let text = _args.join` `
   		  command = (command || '').toLowerCase()
-        let isROwner = [global.conn.user.jid, ...global.owner].map(v => v.replace(/[^0-9]/g, '') + '@s.whatsapp.net').includes(m.sender)
-        let isOwner = isROwner || m.fromMe
-
+        let fail = plugin.fail || global.dfail // When failed
   			let isAccept = plugin.command instanceof RegExp ? // RegExp Mode?
           plugin.command.test(command) :
           Array.isArray(plugin.command) ? // Array?
@@ -156,22 +172,10 @@ conn.handler = async function (m) {
 
   			if (!isAccept) continue
         m.plugin = name
-        let isMods = isOwner || global.mods.map(v => v.replace(/[^0-9]/g, '') + '@s.whatsapp.net').includes(m.sender)
-        let isPrems = isROwner || global.prems.map(v => v.replace(/[^0-9]/g, '') + '@s.whatsapp.net').includes(m.sender)
-        let groupMetadata = m.isGroup ? await this.groupMetadata(m.chat) : {}
-        let participants = m.isGroup ? groupMetadata.participants : []
-        let user = m.isGroup ? participants.find(u => u.jid == m.sender) : {} // User Data
-        let bot = m.isGroup ? participants.find(u => u.jid == this.user.jid) : {} // Your Data
-        let isAdmin = user.isAdmin || user.isSuperAdmin || false // Is User Admin?
-        let isBotAdmin = bot.isAdmin || bot.isSuperAdmin || false // Are you Admin?
         if (m.chat in global.DATABASE._data.chats) {
           let chat = global.DATABASE._data.chats[m.chat]
           if (name != 'unbanchat.js' && chat && chat.isBanned) return // Except this
         }
-        if (plugin.before && plugin.before({
-          usedPrefix
-        })) return
-        let fail = plugin.fail || global.dfail // When failed
         if (plugin.rowner && !isROwner) { // Real Owner
           fail('rowner', m, this)
           continue
@@ -202,17 +206,17 @@ conn.handler = async function (m) {
           fail('private', m, this)
           continue
         }
-        if (plugin.register && _user.registered == false) { // Butuh daftar?
+        if (plugin.register == true && _user.registered == false) { // Butuh daftar?
           fail('unreg', m, this)
           continue
         }
 
         m.isCommand = true
         let xp = 'exp' in plugin ? parseInt(plugin.exp) : 9 // XP Earning per command
-        if (xp > 99) m.reply('Ngecit -_-') // Hehehe
+        if (xp > 99) m.reply('Ngecheat -_-') // Hehehe
         else m.exp += xp
         if (!isPrems && global.DATABASE._data.users[m.sender].limit < m.limit * 1 && plugin.limit) {
-          this.reply(m.chat, `Limit anda habis, silahkan beli melalui *${usedPrefix}buy*`, m)
+          this.reply(m.chat, `Limit kamu habis, silahkan beli melalui *${usedPrefix}buy*`, m)
           continue // Limit habis
         }
         try {
@@ -240,7 +244,7 @@ conn.handler = async function (m) {
           if (e) m.reply(util.format(e))
         } finally {
           // m.reply(util.format(_user)) 
-          if (m.limit) m.reply(+ m.limit + ' limit berkurang')
+          if (m.limit) m.reply(+ m.limit + ' Limit terpakai')
         }
   			break
   		}
@@ -473,3 +477,4 @@ Object.freeze(global.support)
 if (!global.support.ffmpeg) conn.logger.warn('Please install ffmpeg for sending videos (pkg install ffmpeg)')
 if (!global.support.ffmpegWebp) conn.logger.warn('Stickers may not animated without libwebp on ffmpeg (--emable-ibwebp while compiling ffmpeg)')
 if (!global.support.convert) conn.logger.warn('Stickers may not work without imagemagick if libwebp on ffmpeg doesnt isntalled (pkg install imagemagick)')
+
