@@ -244,7 +244,7 @@ conn.handler = async function (m) {
           if (e) m.reply(util.format(e))
         } finally {
           // m.reply(util.format(_user)) 
-          if (m.limit) m.reply(+ m.limit + ' Limit terpakai')
+          if (m.limit) m.reply(+ m.limit + ' limit berkurang')
         }
   			break
   		}
