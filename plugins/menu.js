@@ -93,7 +93,7 @@ let handler  = async (m, { conn, usedPrefix: _p }) => {
 ⌲ *Sosmed*
 --------------------
 ↱ ⌬ yt: stardustlrlr
-↳ ⌬ ig: stardustlrlr
+↳ ⌬ github: %github
 ──────────────
 %readmore
 Btw have a nice day:>
@@ -143,7 +143,7 @@ handler.admin = false
 handler.botAdmin = false
 
 handler.fail = null
-handler.exp = 5
+handler.exp = 3
 
 module.exports = handler
 
