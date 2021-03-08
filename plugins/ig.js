@@ -9,7 +9,7 @@ let handler = async (m, { conn, args }) => {
   let text = `
 Username: ${name} *(@${username})*
 ${likes} Likes
-Bio:
+Caption:
 ${caption}
 `.trim()
   for (let { data: url, type } of data)
