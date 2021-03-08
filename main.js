@@ -115,7 +115,7 @@ global.reloadHandler = function () {
     conn.off('group-add', conn.onAdd)
     conn.off('group-leave', conn.onLeave)
   }
-  conn.welcome = 'Selamat Datang @user\n*Di GROUP* @subject\n=================================\n*ጸ Nama*:\n*⌬ Umur*:\n*⌬ Askot*:\n*⌬ Doi*?\n=================================\n*_Semoga betah ngogheyy_*'
+  conn.welcome = 'Selamat Datang @user\n*Di GROUP* @subject\n=================================\n*ጸ NAMA*:\n*⌬ UMUR*:\n*⌬ ASKOT*:\n*⌬ DOi?*\n=================================\n*_Salkenn Mogaa betahh ngogheyy_*'
   conn.bye = '*Sayonaraaa👋🏻* @user\nKenapaa *keluar* sihh ahh *malesinn* yawdahh awass ajaa *balikl* lagii!'
   conn.handler = handler.handler
   conn.onAdd = handler.welcome 
