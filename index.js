@@ -4,15 +4,15 @@ let path = require('path')
 let fs = require('fs')
 let package = require('./package.json')
 const CFonts  = require('cfonts')
-CFonts.say('MLSPACETOON BOT\nTEAM TERMUX', {
+CFonts.say('MLSPACETOON\nTEAM TERMUX', {
   font: 'chrome',
   align: 'center',
-  gradient: ['red', 'magenta']
+  gradient: ['red', 'yellow']
 })
 CFonts.say(`'${package.name}' By @stardustlrlr`, {
   font: 'console',
   align: 'center',
-  gradient: ['red', 'yellow']
+  gradient: ['red', 'magenta']
 })
 
 function start(file) {
@@ -25,7 +25,7 @@ function start(file) {
   let p = spawn(process.argv[0], args, {
     stdio: ['inherit', 'inherit', 'inherit', 'ipc']
   })
-  .on('message', data => {
+  p.on('message', data => {
     console.log('[RECEIVED]', data)
     switch (data) {
       case 'reset':
@@ -37,11 +37,12 @@ function start(file) {
         break
     }
   })
-  .on('error', e => {
-    console.error(e)
+  p.on('exit', code => {
+    console.error('Exited with code:', code)
+    if (code === 0) return
     fs.watchFile(args[0], () => {
-      start()
       fs.unwatchFile(args[0])
+      start(file)
     })
   })
   // console.log(p)
